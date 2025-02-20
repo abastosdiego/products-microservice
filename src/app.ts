@@ -1,6 +1,6 @@
 import express from "express";
-import conectaMongo from "./config/mongoConnect.js";
-import routes from "./routes/index.js";
+import conectaMongo from "./infra/config/mongoConnect.js";
+import routes from "./infra/routes/index.js";
 
 const conexao = await conectaMongo();
 conexao.on("error", (error: any) => {

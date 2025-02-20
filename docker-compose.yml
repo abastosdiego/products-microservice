@@ -13,6 +13,7 @@ services:
     environment:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
+      no_proxy: localhost
       NODE_ENV: development
       INICIALIZAR_PROJETO: true
     restart: unless-stopped
