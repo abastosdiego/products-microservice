@@ -1,6 +1,6 @@
 import express from "express";
 import conectaMongo from "./config/mongoConnect.js";
-import product from "./models/Product.js";
+import routes from "./routes/index.js";
 
 const conexao = await conectaMongo();
 conexao.on("error", (erro) => {
@@ -11,15 +11,6 @@ conexao.once("open", () => {
 });
 
 const app = express();
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.status(200).send("Hello Express");
-});
-
-app.get("/products", async (req, res) => {
-    const livros = await product.find({});
-    res.status(200).send(livros);
-});
+routes(app);
 
 export default app;
