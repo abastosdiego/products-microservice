@@ -1,6 +1,6 @@
 {
     "watch": ["."],
-    "ext": "js,json",
+    "ext": "ts,js,json",
     "ignore": ["node_modules"],
     "legacyWatch": true
 }

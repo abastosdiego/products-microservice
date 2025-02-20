@@ -14,4 +14,5 @@ fi
 
 yarn install --frozen-lockfile
 
-npx nodemon server.js
+#npx nodemon server.js
+npx nodemon --exec "node --loader ts-node/esm" server.js

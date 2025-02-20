@@ -3,16 +3,16 @@ services:
     container_name: product-microservice
     build:
       context: .
-#      args:
-#        http_proxy: ${http_proxy}
-#        https_proxy: ${https_proxy}
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
     ports:
       - "3000:3000"
     volumes:
       - ./:/app
     environment:
-#      http_proxy: ${http_proxy}
-#      https_proxy: ${https_proxy}
+      http_proxy: ${http_proxy}
+      https_proxy: ${https_proxy}
       NODE_ENV: development
       INICIALIZAR_PROJETO: false
     restart: unless-stopped

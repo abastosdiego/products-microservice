@@ -1,0 +1,62 @@
+// Instalar a extensão "Rest Client" do VSCode
+
+// Configurar o arquivo settings.json do VSCode :
+// "rest-client.excludeHostsForProxy": ["localhost","127.0.0.1"]
+
+@urlBase = http://localhost:3000
+
+####################################################
+## Autenticação
+####################################################
+
+# @name autenticar
+#POST {{urlBase}}/auth/get_token
+#Content-Type: application/json
+#
+#{
+#  "username": "00000000002",
+#  "password": "Agu123456"
+#}
+
+###
+#@token = {{autenticar.response.body.$.token}}
+
+####################################################
+
+###
+
+# @name listarProdutos
+GET {{urlBase}}/products
+
+###
+
+# @name obterProdutoPeloId
+GET {{urlBase}}/products/67b71c868a70ffa8f30e2678
+
+###
+
+# @name cadastrarProduto
+POST {{urlBase}}/products
+Content-Type: application/json
+
+{
+    "descricao": "Caneta",
+    "teste": "Teste"
+}
+
+###
+
+# @name atualizarProduto
+PUT {{urlBase}}/products/67b71c868a70ffa8f30e2678
+Content-Type: application/json
+
+{
+    "descricao": "Caneta Preta",
+    "teste": "Teste"
+}
+
+###
+
+
+# @name excluirProduto
+DELETE {{urlBase}}/products/67b71c868a70ffa8f30e2678
