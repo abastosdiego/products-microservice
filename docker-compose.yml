@@ -3,17 +3,36 @@ services:
     container_name: product-microservice
     build:
       context: .
-      args:
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
+#      args:
+#        http_proxy: ${http_proxy}
+#        https_proxy: ${https_proxy}
     ports:
       - "3000:3000"
     volumes:
       - ./:/app
-      - /app/node_modules  # Evita sobrescrever node_modules do container
     environment:
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
+#      http_proxy: ${http_proxy}
+#      https_proxy: ${https_proxy}
       NODE_ENV: development
-      INICIALIZAR_PROJETO: true
+      INICIALIZAR_PROJETO: false
     restart: unless-stopped
+    depends_on:
+      - mongo
+  mongo:
+    container_name: product-mongo
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+  mongo-express:
+    container_name: product-mongo-express
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
