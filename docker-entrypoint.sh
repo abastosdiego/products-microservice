@@ -5,7 +5,7 @@ chmod -R 777 .
 
 if [ "$INICIALIZAR_PROJETO" = "true" ]; then
     yarn init -y
-    yarn add typescript ts-node nodemon express mongodb mongoose dotenv
+    yarn add typescript ts-node nodemon express @types/express mongodb mongoose @types/mongoose dotenv
     npx tsc --init
 
     yarn add --dev jest

@@ -31,7 +31,7 @@ GET {{urlBase}}/products
 ###
 
 # @name obterProdutoPeloId
-GET {{urlBase}}/products/67b71c868a70ffa8f30e2678
+GET {{urlBase}}/products/67b72fd1181ef0ecd6c3805e
 
 ###
 
@@ -40,23 +40,21 @@ POST {{urlBase}}/products
 Content-Type: application/json
 
 {
-    "descricao": "Caneta",
-    "teste": "Teste"
+    "descricao": "Caneta"
 }
 
 ###
 
 # @name atualizarProduto
-PUT {{urlBase}}/products/67b71c868a70ffa8f30e2678
+PUT {{urlBase}}/products/67b72fd1181ef0ecd6c3805e
 Content-Type: application/json
 
 {
-    "descricao": "Caneta Preta",
-    "teste": "Teste"
+    "descricao": "Caneta Preta"
 }
 
 ###
 
 
 # @name excluirProduto
-DELETE {{urlBase}}/products/67b71c868a70ffa8f30e2678
+DELETE {{urlBase}}/products/67b72fd1181ef0ecd6c3805e

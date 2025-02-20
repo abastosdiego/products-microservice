@@ -14,7 +14,7 @@ services:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
       NODE_ENV: development
-      INICIALIZAR_PROJETO: false
+      INICIALIZAR_PROJETO: true
     restart: unless-stopped
     depends_on:
       - mongo
