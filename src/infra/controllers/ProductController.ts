@@ -4,8 +4,8 @@ import product from "../models/Product.js";
 export default class ProductController {
     static async getAllProducts (req: Request, res: Response) {
         try {
-            const livros = await product.find({});
-            res.status(200).json(livros);
+            const products = await product.find({});
+            res.status(200).json(products);
         } catch (error: any) {
             res.status(500).json({message: error?.message});
         }
@@ -14,8 +14,8 @@ export default class ProductController {
     static async getProductById (req: Request, res: Response) {
         try {
             const id = req.params.id;
-            const livro = await product.findById(id);
-            res.status(200).json(livro);
+            const objProduct = await product.findById(id);
+            res.status(200).json(objProduct);
         } catch (error: any) {
             res.status(500).json({message: error?.message});
         }
