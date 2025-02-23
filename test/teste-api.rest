@@ -40,17 +40,19 @@ POST {{urlBase}}/products
 Content-Type: application/json
 
 {
-    "descricao": "Caneta"
+    "description": "Caneta Azul",
+    "price": 10
 }
 
 ###
 
 # @name atualizarProduto
-PUT {{urlBase}}/products/67b72fd1181ef0ecd6c3805e
+PUT {{urlBase}}/products/c0fdb37a-a47a-4ce4-8d2a-8c90d0a00733
 Content-Type: application/json
 
 {
-    "descricao": "Caneta Preta"
+    "description": "Caneta Preta",
+    "price": 11
 }
 
 ###

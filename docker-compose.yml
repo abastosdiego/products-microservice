@@ -3,22 +3,23 @@ services:
     container_name: product-microservice
     build:
       context: .
-      args:
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
+#      args:
+#        http_proxy: ${http_proxy}
+#        https_proxy: ${https_proxy}
     ports:
       - "3000:3000"
     volumes:
       - ./:/app
     environment:
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
-      no_proxy: localhost
+#      http_proxy: ${http_proxy}
+#      https_proxy: ${https_proxy}
+#      no_proxy: localhost
       NODE_ENV: development
-      INICIALIZAR_PROJETO: true
+      INSTALL_NODE_MODULES: false
     restart: unless-stopped
     depends_on:
       - mongo
+      - mongo-express
   mongo:
     container_name: product-mongo
     image: mongo

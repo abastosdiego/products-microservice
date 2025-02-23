@@ -1,10 +1,13 @@
-import product from "../../infra/models/Product.js";
+import Product from "../../domain/Product.js";
+import ProductRepository from "../repository/ProductRepository.js";
 
 export default class AddProduct {
-    constructor() {
+    constructor(private productRepository: ProductRepository) {
     }
 
-    async execute(input: []): Promise<any> {
-        return product.create(input);
+    public async execute(input: any): Promise<any> {
+        const product = Product.create(input?.description, input?.price);
+        console.log(product.getDescription());
+        return this.productRepository.create(product);
     }
 }
