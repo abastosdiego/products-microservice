@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
-import productMongoModel from "../mongodb/models/ProductMongoModel.js";
-import ProductRepository from '../../application/repository/ProductRepository.js';
 import ProductRepositoryMongo from '../repository/ProductRepositoryMongo.js';
 import AddProduct from '../../application/useCase/AddProduct.js';
+import UpdateProduct from '../../application/useCase/UpdateProduct.js';
+import DeleteProduct from '../../application/useCase/DeleteProduct.js';
+import GetProductById from '../../application/useCase/GetProductById.js';
 
 export default class ProductController {
     static async getAllProducts (req: Request, res: Response) {
         try {
-            const products = await productMongoModel.find({});
+            const productRepository = new ProductRepositoryMongo();
+            const products = await productRepository.list();
+            console.log(products);
             res.status(200).json(products);
         } catch (error: any) {
             res.status(500).json({message: error?.message});
@@ -16,9 +19,11 @@ export default class ProductController {
 
     static async getProductById (req: Request, res: Response) {
         try {
+            const productRepository = new ProductRepositoryMongo();
             const id = req.params.id;
-            const objProduct = await productMongoModel.findById(id);
-            res.status(200).json(objProduct);
+            const getProductById = new GetProductById(productRepository);
+            const product = await getProductById.execute(id);
+            res.status(200).json(product);
         } catch (error: any) {
             res.status(500).json({message: error?.message});
         }
@@ -31,8 +36,6 @@ export default class ProductController {
             const input = req.body;
             await addProduct.execute(input);
             res.status(201).json({message: "Produto criado com sucesso!"});
-            //const newProduct = await productMongoModel.create(req.body);
-            //res.status(201).json({message: "criado com sucesso!", productId: newProduct._id});
         } catch (error: any) {
             res.status(500).json({message: error?.message});
         }
@@ -40,8 +43,11 @@ export default class ProductController {
 
     static async updateProduct (req: Request, res: Response) {
         try {
+            const productRepository = new ProductRepositoryMongo();
+            const updateProduct = new UpdateProduct(productRepository);
             const id = req.params.id;
-            await productMongoModel.findByIdAndUpdate(id, req.body);
+            const input = req.body;
+            await updateProduct.execute(id, input);
             res.status(200).json({message: "atualizado!"});
         } catch (error: any) {
             res.status(500).json({message: error?.message});
@@ -50,8 +56,10 @@ export default class ProductController {
 
     static async deleteProduct (req: Request, res: Response) {
         try {
+            const productRepository = new ProductRepositoryMongo();
+            const deleteProduct = new DeleteProduct(productRepository);
             const id = req.params.id;
-            await productMongoModel.findByIdAndDelete(id);
+            deleteProduct.execute(id);
             res.status(200).json({message: "excluído!"});
         } catch (error: any) {
             res.status(500).json({message: error?.message});

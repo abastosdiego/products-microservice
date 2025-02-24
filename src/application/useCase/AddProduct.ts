@@ -7,7 +7,6 @@ export default class AddProduct {
 
     public async execute(input: any): Promise<any> {
         const product = Product.create(input?.description, input?.price);
-        console.log(product.getDescription());
         return this.productRepository.create(product);
     }
 }

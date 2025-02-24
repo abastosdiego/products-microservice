@@ -1,6 +1,6 @@
 import axios from "axios";
 
-test('cadastrar produto', async () => {
+test('add product', async () => {
     const input = {
         description: "Produto",
         price: 10
@@ -13,43 +13,42 @@ test('cadastrar produto', async () => {
     //expect(responseGet.data.descricao).toBe('Produto');
 });
 
-test('listar produtos', async () => {
+test('list products', async () => {
         const response = await axios.get('http://localhost:3000/products');
         expect(response.status).toBe(200);
         expect(response.data).toBeDefined();
 });
 
-test('alterar produto', async () => {
-
+test('update product', async () => {
     const response = await axios.get('http://localhost:3000/products');
-    const id = response.data?.[0]?.['_id'];
+    const id = response.data?.[0]?.['id'];
     const description = response.data?.[0]?.['description'];
-
-    if (!(id && description)){
+    const price = response.data?.[0]?.['price'];
+    if (!(id && description && price)){
         throw new Error('Os dados recebidos são inválidos ou incompletos.');
     }
-    const descriptionAlterada = `${description}_`;
+    const newDescription = `${description}_`;
+    const newPrice = price + 1;
     const input = {
-        description: descriptionAlterada
+        description: newDescription,
+        price: newPrice
     };
-    const responseAlterar = await axios.put(`http://localhost:3000/products/${id}`, input);
-    expect(responseAlterar.status).toBe(200);
-   
+    const responseUpdate = await axios.put(`http://localhost:3000/products/${id}`, input);
+    expect(responseUpdate.status).toBe(200);
+    const responseGet = await axios.get(`http://localhost:3000/products/${id}`);
+    expect(responseGet.data.description).toBe(newDescription);
+    expect(responseGet.data.price).toBe(newPrice);
 });
 
-test('excluir produto', async () => {
-
+test('delete product', async () => {
     const responseGet = await axios.get('http://localhost:3000/products');
-    const id = responseGet.data?.[0]?.['_id'];
-
+    const id = responseGet.data?.[0]?.['id'];
     if (!(id)){
         throw new Error('Os dados recebidos são inválidos ou incompletos.');
     }
-    const qtdeProdutos = responseGet.data.length;
-
+    const productsQuantity = responseGet.data.length;
     const responseDelete = await axios.delete(`http://localhost:3000/products/${id}`);
     expect(responseDelete.status).toBe(200);
-   
     const responseGetAfterDelete = await axios.get('http://localhost:3000/products');
-    expect(responseGetAfterDelete.data.length).toBe(qtdeProdutos-1);
+    expect(responseGetAfterDelete.data.length).toBe(productsQuantity-1);
 });
