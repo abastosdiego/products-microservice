@@ -31,7 +31,7 @@ GET {{urlBase}}/products
 ###
 
 # @name obterProdutoPeloId
-GET {{urlBase}}/products/b7dde7b8-3906-41f7-bf55-3fbc41a41880
+GET {{urlBase}}/products/6c03d804-781f-46ae-b7b6-bdc708aa57cc
 
 ###
 

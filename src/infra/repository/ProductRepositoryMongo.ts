@@ -1,15 +1,11 @@
-import mongoose from "mongoose";
 import ProductRepository from "../../application/repository/ProductRepository";
-import productMongoModel from "../mongodb/models/ProductMongoModel.js";
 import Product from "../../domain/Product.js";
+import productMongoModel from "./mongoModels/ProductMongoModel.js";
 
 export default class ProductRepositoryMongo implements ProductRepository {
-    constructor() {
-    }
-
     async list(): Promise<Product[]> {
         const productsMongo = await productMongoModel.find({});
-        const products = productsMongo.map((p) => {
+        const products = productsMongo.map((p: any) => {
             return Product.populate(p.id, p.description, p.price);
         });
         return products;
