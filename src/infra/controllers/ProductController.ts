@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import ProductRepositoryMongo from '../repository/ProductRepositoryMongo.js';
 import AddProduct from '../../application/useCase/AddProduct.js';
-import UpdateProduct from '../../application/useCase/UpdateProduct.js';
 import DeleteProduct from '../../application/useCase/DeleteProduct.js';
 import GetProductById from '../../application/useCase/GetProductById.js';
+import UpdateProduct from '../../application/useCase/UpdateProduct.js';
+import ProductRepositoryMongo from '../repository/ProductRepositoryMongo.js';
 
 export default class ProductController {
     static async getAllProducts (req: Request, res: Response) {
@@ -33,9 +33,12 @@ export default class ProductController {
         try {
             const productRepository = new ProductRepositoryMongo();
             const addProduct = new AddProduct(productRepository);
-            const input = req.body;
-            await addProduct.execute(input);
-            res.status(201).json({message: "Produto criado com sucesso!"});
+            const input = {
+                description: req.body.description,
+                price: req.body.price
+            }
+            const output = await addProduct.execute(input);
+            res.status(201).json({message: "Produto criado com sucesso!", "id": output.id});
         } catch (error: any) {
             res.status(500).json({message: error?.message});
         }
@@ -46,9 +49,12 @@ export default class ProductController {
             const productRepository = new ProductRepositoryMongo();
             const updateProduct = new UpdateProduct(productRepository);
             const id = req.params.id;
-            const input = req.body;
+            const input = {
+                description: req.body.description,
+                price: req.body.price
+            }
             await updateProduct.execute(id, input);
-            res.status(200).json({message: "atualizado!"});
+            res.status(200).json({message: "Produto atualizado com sucesso!"});
         } catch (error: any) {
             res.status(500).json({message: error?.message});
         }
@@ -60,7 +66,7 @@ export default class ProductController {
             const deleteProduct = new DeleteProduct(productRepository);
             const id = req.params.id;
             deleteProduct.execute(id);
-            res.status(200).json({message: "excluído!"});
+            res.status(200).json({message: "Produto excluído com sucesso!"});
         } catch (error: any) {
             res.status(500).json({message: error?.message});
         }

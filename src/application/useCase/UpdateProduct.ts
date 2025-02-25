@@ -4,10 +4,15 @@ export default class UpdateProduct {
     constructor(private productRepository: ProductRepository) {
     }
 
-    public async execute(id: string, input: any): Promise<any> {
+    public async execute(id: string, input: Input): Promise<void> {
         const product = await this.productRepository.findById(id);
         product.setDescription(input.description);
         product.setPrice(input.price);
-        return this.productRepository.update(product);
+        await this.productRepository.update(product);
     }
+}
+
+type Input = {
+    description: string,
+    price: number
 }

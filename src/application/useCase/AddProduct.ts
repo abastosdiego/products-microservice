@@ -5,8 +5,20 @@ export default class AddProduct {
     constructor(private productRepository: ProductRepository) {
     }
 
-    public async execute(input: any): Promise<any> {
-        const product = Product.create(input?.description, input?.price);
-        return this.productRepository.create(product);
+    public async execute(input: Input): Promise<OutPut> {
+        const product = Product.create(input.description, input.price);
+        await this.productRepository.create(product);
+        return {
+            id: product.getId()
+        }
     }
+}
+
+type Input = {
+    description: string,
+    price: number
+}
+
+type OutPut = {
+    id: string
 }
