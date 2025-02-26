@@ -29,7 +29,7 @@ export default class Product {
     }
 
     public setDescription(description: string): void {
-        if (description.length <= 2) {
+        if (description.length < 2) {
             throw new Error("Invalid description!");
         }
         this.description = description;
