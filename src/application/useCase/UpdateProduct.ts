@@ -1,8 +1,11 @@
+import { injectable, inject } from 'tsyringe';
 import ProductRepository from "../repository/ProductRepository.js";
 
+@injectable()
 export default class UpdateProduct {
-    constructor(private productRepository: ProductRepository) {
-    }
+    constructor(
+        @inject('ProductRepository') private productRepository: ProductRepository
+    ) {}
 
     public async execute(id: string, input: Input): Promise<void> {
         const product = await this.productRepository.findById(id);

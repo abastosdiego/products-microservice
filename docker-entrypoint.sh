@@ -5,9 +5,13 @@ chmod -R 777 .
 
 if [ "$INSTALL_NODE_MODULES" = "true" ]; then
     yarn init -y
-    yarn add typescript ts-node nodemon express @types/express mongodb mongoose @types/mongoose dotenv axios
+    yarn add typescript ts-node nodemon express @types/express
+    yarn add dotenv # Environment variables
+    yarn add mongodb mongoose @types/mongoose # MongoDB
+    yarn add tsyringe reflect-metadata ## Dependency injection
+    yarn add --dev jest ts-jest @types/jest # Tests
+    yarn add axios # Http requests
     npx tsc --init
-    yarn add --dev jest ts-jest @types/jest
     yarn install --frozen-lockfile
 fi
 

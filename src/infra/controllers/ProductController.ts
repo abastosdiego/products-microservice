@@ -1,15 +1,16 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import AddProduct from '../../application/useCase/AddProduct.js';
 import DeleteProduct from '../../application/useCase/DeleteProduct.js';
 import GetProductById from '../../application/useCase/GetProductById.js';
 import UpdateProduct from '../../application/useCase/UpdateProduct.js';
-import ProductRepositoryMongo from '../repository/ProductRepositoryMongo.js';
+import GetAllProducts from '../../application/useCase/GetAllProducts.js';
 
 export default class ProductController {
     static async getAllProducts (req: Request, res: Response) {
         try {
-            const productRepository = new ProductRepositoryMongo();
-            const products = await productRepository.list();
+            const getAllProducts = container.resolve(GetAllProducts);
+            const products = await getAllProducts.execute();
             console.log(products);
             res.status(200).json(products);
         } catch (error: any) {
@@ -19,9 +20,8 @@ export default class ProductController {
 
     static async getProductById (req: Request, res: Response) {
         try {
-            const productRepository = new ProductRepositoryMongo();
+            const getProductById = container.resolve(GetProductById);
             const id = req.params.id;
-            const getProductById = new GetProductById(productRepository);
             const product = await getProductById.execute(id);
             res.status(200).json(product);
         } catch (error: any) {
@@ -31,8 +31,7 @@ export default class ProductController {
 
     static async addProduct (req: Request, res: Response) {
         try {
-            const productRepository = new ProductRepositoryMongo();
-            const addProduct = new AddProduct(productRepository);
+            const addProduct = container.resolve(AddProduct);
             const input = {
                 description: req.body.description,
                 price: req.body.price
@@ -46,8 +45,7 @@ export default class ProductController {
 
     static async updateProduct (req: Request, res: Response) {
         try {
-            const productRepository = new ProductRepositoryMongo();
-            const updateProduct = new UpdateProduct(productRepository);
+            const updateProduct = container.resolve(UpdateProduct);
             const id = req.params.id;
             const input = {
                 description: req.body.description,
@@ -62,8 +60,7 @@ export default class ProductController {
 
     static async deleteProduct (req: Request, res: Response) {
         try {
-            const productRepository = new ProductRepositoryMongo();
-            const deleteProduct = new DeleteProduct(productRepository);
+            const deleteProduct = container.resolve(DeleteProduct);
             const id = req.params.id;
             deleteProduct.execute(id);
             res.status(200).json({message: "Produto excluído com sucesso!"});

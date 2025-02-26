@@ -1,7 +1,9 @@
+import { injectable } from 'tsyringe';
 import ProductRepository from "../../application/repository/ProductRepository";
 import Product from "../../domain/Product.js";
 import productMongoModel from "./mongoModels/ProductMongoModel.js";
 
+@injectable()
 export default class ProductRepositoryMongo implements ProductRepository {
     async list(): Promise<Product[]> {
         const productsMongo = await productMongoModel.find({});

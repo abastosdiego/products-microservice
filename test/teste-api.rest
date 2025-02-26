@@ -31,7 +31,7 @@ GET {{urlBase}}/products
 ###
 
 # @name obterProdutoPeloId
-GET {{urlBase}}/products/0aebac98-7982-4239-a06d-938863c9f325
+GET {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
 
 ###
 
@@ -47,7 +47,7 @@ Content-Type: application/json
 ###
 
 # @name atualizarProduto
-PUT {{urlBase}}/products/c0fdb37a-a47a-4ce4-8d2a-8c90d0a00733
+PUT {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
 Content-Type: application/json
 
 {
@@ -59,4 +59,4 @@ Content-Type: application/json
 
 
 # @name excluirProduto
-DELETE {{urlBase}}/products/67b72fd1181ef0ecd6c3805e
+DELETE {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
