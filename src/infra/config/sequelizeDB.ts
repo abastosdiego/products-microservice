@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import tipoProdutoSequelizeModel from '../repository/sequelizeModels/TipoProdutoModel.js';
+import tipoProdutoSequelizeModel from '../repository/sequelizeModels/typeProductSequelizeModel.js';
 import sequelize from './sequelizeConnect.js';
 
 interface DbModels {

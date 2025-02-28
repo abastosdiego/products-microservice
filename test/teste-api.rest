@@ -60,3 +60,24 @@ Content-Type: application/json
 
 # @name excluirProduto
 DELETE {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
+
+
+###
+
+# @name addTypeProduct
+POST {{urlBase}}/type-products
+Content-Type: application/json
+
+{
+    "description": "Material escritório"
+}
+
+###
+
+# @name updateTypeProduct
+PUT {{urlBase}}/type-products/e3522a8f-e642-4760-bccc-3f6383f83cc5
+Content-Type: application/json
+
+{
+    "description": "Material escritório (alt)"
+}

@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
-import Product from "../../domain/Product.js";
-import ProductRepository from "../repository/ProductRepository.js";
+import Product from "../../../domain/Product.js";
+import ProductRepository from "../../repository/ProductRepository.js";
 
 @injectable()
 export default class GetProductById {

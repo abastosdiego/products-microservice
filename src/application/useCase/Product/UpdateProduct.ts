@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-import ProductRepository from "../repository/ProductRepository.js";
+import ProductRepository from "../../repository/ProductRepository.js";
 
 @injectable()
 export default class UpdateProduct {

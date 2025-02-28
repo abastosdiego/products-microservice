@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import AddProduct from '../../application/useCase/AddProduct.js';
-import DeleteProduct from '../../application/useCase/DeleteProduct.js';
-import GetProductById from '../../application/useCase/GetProductById.js';
-import UpdateProduct from '../../application/useCase/UpdateProduct.js';
-import GetAllProducts from '../../application/useCase/GetAllProducts.js';
+import AddProduct from '../../application/useCase/Product/AddProduct.js';
+import DeleteProduct from '../../application/useCase/Product/DeleteProduct.js';
+import GetProductById from '../../application/useCase/Product/GetProductById.js';
+import UpdateProduct from '../../application/useCase/Product/UpdateProduct.js';
+import GetAllProducts from '../../application/useCase/Product/GetAllProducts.js';
 
 export default class ProductController {
     static async getAllProducts (req: Request, res: Response) {
