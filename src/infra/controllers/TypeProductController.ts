@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import AddTypeProduct from '../../application/useCase/TypeProduct/AddTypeProduct.js';
+import DeleteTypeProduct from '../../application/useCase/TypeProduct/DeleteTypeProduct.js';
+import GetTypeProductById from '../../application/useCase/TypeProduct/GetTypeProductById.js';
 import UpdateTypeProduct from '../../application/useCase/TypeProduct/UpdateTypeProduct.js';
 
 export default class TypeProductController {
@@ -15,16 +17,17 @@ export default class TypeProductController {
     //     }
     // }
 
-    // static async getProductById (req: Request, res: Response) {
-    //     try {
-    //         const getProductById = container.resolve(GetProductById);
-    //         const id = req.params.id;
-    //         const product = await getProductById.execute(id);
-    //         res.status(200).json(product);
-    //     } catch (error: any) {
-    //         res.status(500).json({message: error?.message});
-    //     }
-    // }
+    static async getById (req: Request, res: Response) {
+        try {
+            console.log("######## entrei aqui #############3");
+            const getTypeProductById = container.resolve(GetTypeProductById);
+            const id = req.params.id;
+            const product = await getTypeProductById.execute(id);
+            res.status(200).json(product);
+        } catch (error: any) {
+            res.status(500).json({message: error?.message});
+        }
+    }
 
     static async add (req: Request, res: Response) {
         try {
@@ -53,14 +56,14 @@ export default class TypeProductController {
         }
     }
 
-    // static async deleteProduct (req: Request, res: Response) {
-    //     try {
-    //         const deleteProduct = container.resolve(DeleteProduct);
-    //         const id = req.params.id;
-    //         deleteProduct.execute(id);
-    //         res.status(200).json({message: "Produto excluído com sucesso!"});
-    //     } catch (error: any) {
-    //         res.status(500).json({message: error?.message});
-    //     }
-    // }
+    static async delete (req: Request, res: Response) {
+        try {
+            const deleteTypeProduct = container.resolve(DeleteTypeProduct);
+            const id = req.params.id;
+            deleteTypeProduct.execute(id);
+            res.status(200).json({message: "Tipo de Produto excluído com sucesso!"});
+        } catch (error: any) {
+            res.status(500).json({message: error?.message});
+        }
+    }
 }

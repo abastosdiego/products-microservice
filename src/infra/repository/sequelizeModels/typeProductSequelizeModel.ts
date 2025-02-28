@@ -10,6 +10,8 @@ const typeProductSequelizeModel = sequelize.define('TipoProduto', {
     type: DataTypes.STRING,
     allowNull: false, // Campo obrigatório
   },
+}, {
+  tableName: 'tipo_produto' // Nome real da tabela no banco de dados
 });
 
 export default typeProductSequelizeModel;

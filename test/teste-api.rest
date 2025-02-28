@@ -23,19 +23,21 @@
 
 ####################################################
 
-###
+################################
+# PRODUCT
+################################
 
-# @name listarProdutos
+# @name getAllProducts
 GET {{urlBase}}/products
 
 ###
 
-# @name obterProdutoPeloId
+# @name getProductById
 GET {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
 
 ###
 
-# @name cadastrarProduto
+# @name addProduct
 POST {{urlBase}}/products
 Content-Type: application/json
 
@@ -46,7 +48,7 @@ Content-Type: application/json
 
 ###
 
-# @name atualizarProduto
+# @name updateProduct
 PUT {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
 Content-Type: application/json
 
@@ -57,10 +59,16 @@ Content-Type: application/json
 
 ###
 
-
-# @name excluirProduto
+# @name deleteProduct
 DELETE {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
 
+
+################################
+# TYPE PRODUCT
+################################
+
+# @name getTypeProductById
+GET {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5
 
 ###
 
@@ -75,9 +83,14 @@ Content-Type: application/json
 ###
 
 # @name updateTypeProduct
-PUT {{urlBase}}/type-products/e3522a8f-e642-4760-bccc-3f6383f83cc5
+PUT {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5
 Content-Type: application/json
 
 {
     "description": "Material escritório (alt)"
 }
+
+###
+
+# @name deleteTypeProduct
+DELETE {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5

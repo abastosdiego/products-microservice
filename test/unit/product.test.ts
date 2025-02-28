@@ -3,6 +3,7 @@ import Product from "../../src/domain/Product.js";
 describe("Product", () => {
   it("deve criar um produto com descrição e preço corretos", () => {
     const product = Product.create("Smartphone", 2000);
+    expect(product.getId()).toBeDefined();
     expect(product.getDescription()).toBe("Smartphone");
     expect(product.getPrice()).toBe(2000);
   });

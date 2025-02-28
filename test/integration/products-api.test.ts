@@ -7,10 +7,10 @@ test('add product', async () => {
     };
     const responseCadastrar = await axios.post('http://localhost:3000/products', input);
     expect(responseCadastrar.status).toBe(201);
-    //expect(responseCadastrar.data.productId).toBeDefined();
-    //const responseGet = await axios.get(`http://localhost:3000/products/${responseCadastrar.data.productId}`);
-    //expect(responseGet.status).toBe(200);
-    //expect(responseGet.data.descricao).toBe('Produto');
+    expect(responseCadastrar.data.id).toBeDefined();
+    const responseGet = await axios.get(`http://localhost:3000/products/${responseCadastrar.data.id}`);
+    expect(responseGet.status).toBe(200);
+    expect(responseGet.data.description).toBe('Produto');
 });
 
 test('list products', async () => {

@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe';
-import TypeProduct from '../../domain/TypeProduct.js';
 import TypeProductRepository from '../../application/repository/TypeProductRepository.js';
+import TypeProduct from '../../domain/TypeProduct.js';
 import typeProductSequelizeModel from './sequelizeModels/typeProductSequelizeModel.js';
 
 @injectable()
@@ -21,7 +21,10 @@ export default class TypeProductRepositorySequelize implements TypeProductReposi
             id: typeProduct.getId(),
             description: typeProduct.getDescription()
         }
-        await typeProductSequelizeModel.create(values);
+        const created = await typeProductSequelizeModel.create(values);
+        if (!created) {
+            throw new Error("Erro ao criar o tipo de produto!");
+        }
     }
     async update(typeProduct: TypeProduct): Promise<void> {
         const id = typeProduct.getId();
@@ -29,9 +32,15 @@ export default class TypeProductRepositorySequelize implements TypeProductReposi
             id: typeProduct.getId(),
             description: typeProduct.getDescription()
         }
-        await typeProductSequelizeModel.update(values, { where:{id} });
+        const [updatedRows] = await typeProductSequelizeModel.update(values, { where: { id } });
+        if (updatedRows === 0) {
+            throw new Error("Tipo de produto não encontrado!");
+        }
     }
-    delete(id: string): Promise<void> {
-        throw new Error('Method not implemented.');
+    async delete(id: string): Promise<void> {
+        const deletedRows = await typeProductSequelizeModel.destroy({ where: { id } });
+        if (deletedRows === 0) {
+            throw new Error("Tipo de produto não encontrado!");
+        }
     }
 }
