@@ -1,74 +1,13 @@
-# Comandos para criar o ambiente de desenvolvimento Node.js com Typescript, nodemon e Jest configurados usando docker-compose
----
+# Necessário docker e docker compose instalados para rodar o ambiente de desenvolvimento.
+# Ambiente Node.js com Typescript, nodemon e Jest configurados usando docker-compose.
 
-Abrir o arquivo docker-compose.yml e verificar se o parâmetro INICIALIZAR_PROJETO está true.
-
-###
-
-Criar o arquivo babel.config.js com o seguinte conteúdo:
-
-```php
-module.exports = {
-  presets: [
-    ['@babel/preset-env', {targets: {node: 'current'}}],
-    '@babel/preset-typescript',
-  ],
-};
-```
-
-###
-
-Criar a pasta "src".
-
-Dentro da pasta src:
-
-Criar o arquivo HelloWorld.ts com o seguinte conteúdo:
-```php
-export default class HelloWorld {
-    constructor(readonly $name: string) {
-    }
-}
-```
-
-Criar o arquivo main.ts com o seguinte conteúdo:
-
-```php
-import HelloWorld from "./HelloWorld";
-
-console.log(new HelloWorld('Hello Node.js!'));
-
-let mensagem: string = "TypeScript está funcionando!!";
-console.log(mensagem);
-```
-
-No terminal, rodar o seguinte comando:
+No terminal, rodar o seguinte comando para subir o ambiente:
 ```php
 docker compose up
 ```
 
-
-# Para verificar se o Jest está funcionando:
-
-Na pasta src, criar o arquivo sum.ts com o seguinte conteúdo:
+rodar os testes dentro do container:
 ```php
-export default function sum(a: number, b: number) {
-    return a + b;
-}
-```
-
-Criar a pasta test.
-
-Dentro da pasta test, criar o arquivo hello-jest.test.js com o seguinte conteúdo:
-```php
-import sum from "../src/sum";
-
-test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1,2)).toBe(3);
-});
-```
-
-rodar o seguinte comando dentro do container:
-```php
-docker exec -it hello-nodejs bash
-yarn jest
+docker exec -it product-microservice bash
+npx jest
 ```
