@@ -49,6 +49,6 @@ services:
       POSTGRES_DB: product
     volumes:
       #- './postgres_data:/var/lib/postgresql/data'
-      - /var/lib/postgresql/data  # Evita sobrescrever node_modules do container
+      - /var/lib/postgresql/data  # Evita sobrescrever a pasta postgres_data do container
     ports:
       - "5432:5432"
