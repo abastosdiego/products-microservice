@@ -1,13 +1,20 @@
-# Necessário docker e docker compose instalados para rodar o ambiente de desenvolvimento.
-# Ambiente Node.js com Typescript, nodemon e Jest configurados usando docker-compose.
+# Ambiente Node.js com Express, Typescript, Nodemon e Jest configurados usando docker-compose.
 
-No terminal, rodar o seguinte comando para subir o ambiente:
+Necessário docker e docker compose instalados para rodar o ambiente de desenvolvimento.
+
+01 - Verificar no docker-compose.yml se o parâmetro INSTALL_NODE_MODULES está true e comentar as linhas de configuração de proxy.
+
+02 - Criar um arquivo .env com base no arquivo .env.exemple.
+
+03 - No terminal, rodar o seguinte comando para subir o ambiente:
 ```php
 docker compose up
 ```
 
-rodar os testes dentro do container:
+04 - Aguardar até aparecer a seguinte mensagem no terminal: "Conexão com o banco de dados estabelecida.".
+
+05 - Rodar os seguintes comandos dentro do container para executar os testes unitários e de integração:
 ```php
 docker exec -it product-microservice bash
-npx jest
+npx jest --verbose
 ```

@@ -3,17 +3,17 @@ services:
     container_name: product-microservice
     build:
       context: .
-      args:
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
+#      args:
+#        http_proxy: ${http_proxy}
+#        https_proxy: ${https_proxy}
     ports:
       - "3000:3000"
     volumes:
       - ./:/app
       #- /app/node_modules  # Evita sobrescrever node_modules do container
     environment:
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
+#      http_proxy: ${http_proxy}
+#      https_proxy: ${https_proxy}
       no_proxy: localhost, postgres
       NODE_ENV: development
       INSTALL_NODE_MODULES: true

@@ -5,7 +5,7 @@ chmod -R 777 .
 
 if [ "$INSTALL_NODE_MODULES" = "true" ]; then
     yarn init -y
-    yarn add typescript ts-node nodemon express @types/express dotenv mongodb mongoose @types/mongoose tsyringe reflect-metadata axios
+    yarn add typescript ts-node nodemon express @types/express dotenv mongodb mongoose @types/mongoose tsyringe reflect-metadata axios sequelize sequelize-cli pg pg-hstore
     yarn add --dev jest ts-jest @types/jest
     #yarn add dotenv # Environment variables
     #yarn add mongodb mongoose @types/mongoose # MongoDB

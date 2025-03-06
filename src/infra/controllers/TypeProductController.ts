@@ -4,22 +4,21 @@ import AddTypeProduct from '../../application/useCase/TypeProduct/AddTypeProduct
 import DeleteTypeProduct from '../../application/useCase/TypeProduct/DeleteTypeProduct.js';
 import GetTypeProductById from '../../application/useCase/TypeProduct/GetTypeProductById.js';
 import UpdateTypeProduct from '../../application/useCase/TypeProduct/UpdateTypeProduct.js';
+import GetAllTypeProducts from '../../application/useCase/TypeProduct/GetAllTypeProducts.js';
 
 export default class TypeProductController {
-    // static async getAllProducts (req: Request, res: Response) {
-    //     try {
-    //         const getAllProducts = container.resolve(GetAllProducts);
-    //         const products = await getAllProducts.execute();
-    //         console.log(products);
-    //         res.status(200).json(products);
-    //     } catch (error: any) {
-    //         res.status(500).json({message: error?.message});
-    //     }
-    // }
+    static async getAll (req: Request, res: Response) {
+        try {
+            const getAllTypeProducts = container.resolve(GetAllTypeProducts);
+            const typeProducts = await getAllTypeProducts.execute();
+            res.status(200).json(typeProducts);
+        } catch (error: any) {
+            res.status(500).json({message: error?.message});
+        }
+    }
 
     static async getById (req: Request, res: Response) {
         try {
-            console.log("######## entrei aqui #############3");
             const getTypeProductById = container.resolve(GetTypeProductById);
             const id = req.params.id;
             const product = await getTypeProductById.execute(id);

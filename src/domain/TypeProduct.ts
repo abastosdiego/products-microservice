@@ -10,7 +10,7 @@ export default class TypeProduct {
         return new TypeProduct(id, description);
     }
 
-    public static populate(id: string, description: string,) {
+    public static populate(id: string, description: string) {
         return new TypeProduct(id, description);
     }
 

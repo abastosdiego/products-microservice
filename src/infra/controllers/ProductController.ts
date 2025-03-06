@@ -11,7 +11,6 @@ export default class ProductController {
         try {
             const getAllProducts = container.resolve(GetAllProducts);
             const products = await getAllProducts.execute();
-            console.log(products);
             res.status(200).json(products);
         } catch (error: any) {
             res.status(500).json({message: error?.message});

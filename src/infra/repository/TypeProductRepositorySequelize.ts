@@ -5,9 +5,13 @@ import typeProductSequelizeModel from './sequelizeModels/typeProductSequelizeMod
 
 @injectable()
 export default class TypeProductRepositorySequelize implements TypeProductRepository {
-    list(): Promise<TypeProduct[]> {
-        throw new Error('Method not implemented.');
+    async list(): Promise<TypeProduct[]> {
+        const typeProductsData = await typeProductSequelizeModel.findAll();
+        return typeProductsData.map(({ dataValues }) => 
+            TypeProduct.populate(dataValues.id, dataValues.description)
+        );
     }
+
     async findById(id: string): Promise<TypeProduct> {
         const typeProductData = await typeProductSequelizeModel.findByPk(id);
         if (!typeProductData) {
@@ -16,6 +20,7 @@ export default class TypeProductRepositorySequelize implements TypeProductReposi
         const { description } = typeProductData.dataValues;
         return TypeProduct.populate(id, description);
     }
+
     async create(typeProduct: TypeProduct): Promise<void> {
         const values = {
             id: typeProduct.getId(),
@@ -26,6 +31,7 @@ export default class TypeProductRepositorySequelize implements TypeProductReposi
             throw new Error("Erro ao criar o tipo de produto!");
         }
     }
+
     async update(typeProduct: TypeProduct): Promise<void> {
         const id = typeProduct.getId();
         const values = {
@@ -37,6 +43,7 @@ export default class TypeProductRepositorySequelize implements TypeProductReposi
             throw new Error("Tipo de produto não encontrado!");
         }
     }
+    
     async delete(id: string): Promise<void> {
         const deletedRows = await typeProductSequelizeModel.destroy({ where: { id } });
         if (deletedRows === 0) {
