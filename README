@@ -1,20 +1,51 @@
-# Ambiente Node.js com Express, Typescript, Nodemon e Jest configurados usando docker-compose.
+# Product Management Microservice
 
-Necessário docker e docker compose instalados para rodar o ambiente de desenvolvimento.
+This is a microservice for product management, developed with **Node.js**, **Express**, **Typescript**, and **Jest**, configured to run in a **Docker** environment.
 
-01 - Verificar no docker-compose.yml se o parâmetro INSTALL_NODE_MODULES está true e comentar as linhas de configuração de proxy.
+## Prerequisites
 
-02 - Criar um arquivo .env com base no arquivo .env.exemple.
+Make sure you have the following installed:
+- **Docker**
+- **Docker Compose**
 
-03 - No terminal, rodar o seguinte comando para subir o ambiente:
-```php
+## Environment Setup
+
+1. **Check Configuration in `docker-compose.yml`:**
+   - Ensure that the `INSTALL_NODE_MODULES` parameter is set to `true`.
+   - Comment out the lines related to proxy configuration, if necessary.
+
+2. **Create the `.env` File:**
+   - Use the `.env.exemple` file as a template to create the `.env` file.
+
+## Starting the Environment
+
+In the terminal, run the following command to start the development environment:
+
+```bash
 docker compose up
 ```
 
-04 - Aguardar até aparecer a seguinte mensagem no terminal: "Conexão com o banco de dados estabelecida.".
+Wait until the following message appears in the terminal:
 
-05 - Rodar os seguintes comandos dentro do container para executar os testes unitários e de integração:
-```php
-docker exec -it product-microservice bash
-npx jest --verbose
 ```
+Database connection established.
+```
+
+## Running Tests
+
+To run unit and integration tests, follow the steps below:
+
+1. Access the microservice container:
+   ```bash
+   docker exec -it product-microservice bash
+   ```
+
+2. Run the tests with the command:
+   ```bash
+   npx jest --verbose
+   ```
+
+## Notes
+
+- Ensure all dependencies are correctly installed before starting the environment.
+- Refer to the Docker and Docker Compose documentation if you encounter any issues during setup.
